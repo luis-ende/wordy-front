@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Layout from './hoc/Layout/Layout'
+import LearningUnitBox from './components/LearningUnitBox/LearningUnitBox'
+import ExpressionList from './containers/Expressions/ExpressionList'
+
+class App extends Component {
+  render() {
+    return (
+      <Layout>
+        <Switch>
+          <Route path="/review" component={ExpressionList} />
+          <Route path="/" exact component={LearningUnitBox} />
+        </Switch>
+      </Layout>
+    )
+  }
 }
 
 export default App;
