@@ -30,7 +30,7 @@ const LearuningUnitSelect = (props) => {
         onChange={handleUnitSelectChange}
         label="Learning Unit"
       >
-        <option aria-label="None" key="default" value="default">Select learning unit</option>
+        <option aria-label="None" key="default" value="-1">Select learning unit</option>
         {props.units.map( unit => (
           <option key={unit.id} value={unit.id}>{unit.name}</option>
         ))}

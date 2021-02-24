@@ -73,7 +73,7 @@ const LearningUnitView = (props) => {
     let expText = '---';
 
     if (props.expressions[currentExpression]) {
-      expText = props.expressions[currentExpression].text;
+      expText = props.expressions[currentExpression].textLanguage1;
     }
 
     return expText;
@@ -83,7 +83,7 @@ const LearningUnitView = (props) => {
     let transText = '---';
 
     if (props.expressions[currentExpression]) {
-      transText = props.expressions[currentExpression].trans;
+      transText = props.expressions[currentExpression].textLanguage2;
     }
 
     return transText;
@@ -124,11 +124,14 @@ const LearningUnitView = (props) => {
 
   const exprs = props.expressions.map(exp => {
     return (
-      <ListItem button>
+      <ListItem
+        key={exp.id}
+        button>
         <ListItemIcon>
           <EditIcon />
         </ListItemIcon>
-        <ListItemText primary={exp.text} />
+        <ListItemText
+          primary={exp.textLanguage1} />
       </ListItem>
     );
   });

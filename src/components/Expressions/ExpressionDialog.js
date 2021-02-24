@@ -22,15 +22,14 @@ const ExpressionDialog = (props) => {
         <TextField
           autoFocus
           margin="dense"
-          id="expression"
+          id="textLanguage1"
           label="Expression"
           type="text"
           fullWidth
         />
         <TextField
-          autoFocus
           margin="dense"
-          id="translation"
+          id="textLanguage2"
           label="Translation"
           type="text"
           fullWidth
