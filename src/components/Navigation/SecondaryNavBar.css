@@ -1,0 +1,32 @@
+.SecondaryNavBar {
+  max-width: 470px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+.SecondaryNavBarItems {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.SecondaryNavBar li {
+}
+
+.SecondaryNavBar a {
+  color: #212121;
+  text-decoration: none;
+  width: 100%;
+  display: block;
+}
+
+.SecondaryNavBar a:hover,
+.SecondaryNavBar a:active,
+.SecondaryNavBar a.active {
+    color: #01579b;
+    border-bottom: solid;
+}

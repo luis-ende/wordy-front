@@ -15,7 +15,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import ExpressionDialog from '../Expressions/ExpressionDialog';
+import ExpressionDialog from '../Expression/ExpressionDialog';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -89,6 +89,8 @@ const NavBar = () => {
 
   const handleClose = () => {
     setOpen(false);
+    // TODO: No the best way to refresh data...
+    window.location.reload();
   };
 
   const classes = useStyles();
@@ -131,15 +133,10 @@ const NavBar = () => {
       </Menu>
     );
 
-    const handleAddExpression = () => {
-        
-    };
-
     const renderAddDialog = (
       <ExpressionDialog
         open={open}
         onClose={handleClose}
-        onAddExpression={handleAddExpression}
       />
     );
 

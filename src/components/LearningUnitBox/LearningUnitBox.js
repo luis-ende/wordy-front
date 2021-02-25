@@ -18,15 +18,16 @@ class LearningUnitBox extends React.Component {
 
   componentDidMount () {
     axios.get( 'learning_units.json' )
-        .then( response => {
-            this.setState( { units: response.data } );
-        })
-        .catch( error => {
-            this.setState( { error: true } );
-        });
+      .then( response => {
+          this.setState( { units: response.data } );
+      })
+      .catch( error => {
+          this.setState( { error: true } );
+      });
   }
 
   handleLearuningUnitChange(learningUnit) {
+    // eslint-disable-next-line
     if (learningUnit == -1) {
       this.setState({
         currentLearningUnit: '',
@@ -35,17 +36,18 @@ class LearningUnitBox extends React.Component {
     }
     else {
       axios.get( `expressions?learningUnits.id=${learningUnit}` )
-          .then( response => {
-              let unit = this.state.units.find( unit => unit.id == learningUnit );
-              let jsonExpressions = response.data['hydra:member'];              
-              this.setState({
-                currentLearningUnit: unit.name,
-                expressions: jsonExpressions
-              });
-          })
-          .catch( error => {
-              this.setState( { error: true } );
-          });
+        .then( response => {
+            // eslint-disable-next-line
+            let unit = this.state.units.find( unit => unit.id == learningUnit );
+            let jsonExpressions = response.data['hydra:member'];
+            this.setState({
+              expressions: jsonExpressions,
+              currentLearningUnit: unit.name
+            });
+        })
+        .catch( error => {
+            this.setState( { error: true } );
+        });
     }
   }
 

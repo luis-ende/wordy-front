@@ -2,13 +2,12 @@ import React from 'react';
 
 import Aux from '../Aux/Aux';
 import { makeStyles } from '@material-ui/core/styles';
-import NavBar from '../../components/Navigation/NavBar'
+import NavBar from '../../components/Navigation/NavBar';
+import SecondaryNavBar from '../../components/Navigation/SecondaryNavBar';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   contentRoot: {
-    marginTop: theme.spacing(4),
   },
   contentTitle: {
     marginBottom: theme.spacing(4),
@@ -27,11 +26,9 @@ const Layout = (props) => {
         <NavBar />
       </header>
       <main className={classes.contentRoot}>
+        <SecondaryNavBar />
         <Aux>
           <Container className={classes.container}>
-            <Typography className={classes.contentTitle} component="h5" variant="h5">
-              Welcome to the Wordy App
-            </Typography>
             {props.children}
           </Container>
         </Aux>
