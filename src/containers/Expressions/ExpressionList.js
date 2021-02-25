@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { useStore } from '../../hooks-store/store';
 import axios from '../../axios-wordyapp';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,22 +30,23 @@ const useStyles = makeStyles((theme) => ({
 
 const ExpressionList = () => {
   const classes = useStyles();
-  const [expressions, setExpressions] = React.useState([]);
-  const [dense, setDense] = React.useState(true);
+  const [state, dispatch] = useStore();
+  const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(true);
   const [error, setError] = React.useState(false);
 
   useEffect(() => {
     axios.get( 'expressions.json' )
       .then( response => {
-        setExpressions(response.data);
+        const expressionsData = response.data;
+        dispatch('SET_EXPRESSIONS', expressionsData);
       })
       .catch( error => {
         setError(true);
       });
   }, []);
 
-  let items = expressions.map( exp => (
+  let items = state.expressions && state.expressions.map( exp => (
     <ListItem key={exp.id}>
       <ListItemAvatar>
         <Avatar>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useStore } from '../../hooks-store/store';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import axios from '../../axios-wordyapp';
 
 const ExpressionDialog = (props) => {
+  const dispatch = useStore()[1];
   const [expression, setExpression] = useState({
     textLanguage1: '',
     textLanguage2: '',
@@ -24,7 +27,8 @@ const ExpressionDialog = (props) => {
   const handleSubmit = () => {
     axios.post( '/expressions.json', expression )
       .then( response => {
-        props.onClose();        
+        dispatch('ADD_EXPRESSION', response.data);
+        props.onClose();
       })
       .catch( error => {
       });

@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+
 import './index.css';
 import App from './App';
+import configureExpressionsStore from './hooks-store/expressions-store';
 //import reportWebVitals from './reportWebVitals';
+
+configureExpressionsStore();
 
 ReactDOM.render(
   <React.StrictMode>

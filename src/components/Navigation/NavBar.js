@@ -89,8 +89,6 @@ const NavBar = () => {
 
   const handleClose = () => {
     setOpen(false);
-    // TODO: No the best way to refresh data...
-    window.location.reload();
   };
 
   const classes = useStyles();
