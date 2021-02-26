@@ -12,8 +12,8 @@ class LearningUnitBox extends React.Component {
       currentLearningUnit: '',
       error: false
     }
-    this.handleLearuningUnitChange = this.handleLearuningUnitChange.bind(this);
-    this.handleExpressionLearned = this.handleExpressionLearned.bind(this);
+    this.handleLearningUnitChange = this.handleLearningUnitChange.bind(this);
+    this.handleIsLearningToggle = this.handleIsLearningToggle.bind(this);
   }
 
   componentDidMount () {
@@ -26,7 +26,7 @@ class LearningUnitBox extends React.Component {
       });
   }
 
-  handleLearuningUnitChange(learningUnit) {
+  handleLearningUnitChange(learningUnit) {
     // eslint-disable-next-line
     if (learningUnit == -1) {
       this.setState({
@@ -51,14 +51,18 @@ class LearningUnitBox extends React.Component {
     }
   }
 
-  handleExpressionLearned(id) {
-    const updatedExpressions = [...this.state.expressions];
-    const expr = updatedExpressions.find(expr => expr.id === id );
-    if (expr) {
-      expr.learned = true;
+  handleIsLearningToggle(expressionId) {
+    let index = this.state.expressions.findIndex(e => e.id === expressionId);
+    if (index >= 0) {
+      let updatedExpressions = [...this.state.expressions];
+      updatedExpressions[index] = {
+        ...this.state.expressions[index],
+        isLearning: !this.state.expressions[index].isLearning
+      }
       this.setState({
-        expressions: updatedExpressions,
+        expressions: updatedExpressions
       });
+      //dispatch('TOGGLE_IS_LEARNING', props.id);
     }
   }
 
@@ -67,12 +71,13 @@ class LearningUnitBox extends React.Component {
       <div>
         <LearningUnitHeader
           units={this.state.units}
-          onLearningUnitChange={this.handleLearuningUnitChange} />
+          onLearningUnitChange={this.handleLearningUnitChange} />
         <LearningUnitView
           unit={this.state.currentLearningUnit}
           expressions={this.state.expressions}
           currentExpression={0}
-          onExpressionLearned={this.handleExpressionLearned} />
+          onIsLearningToggle={this.handleIsLearningToggle}
+        />
       </div>
     );
   }

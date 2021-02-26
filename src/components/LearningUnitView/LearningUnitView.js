@@ -3,6 +3,7 @@ import LearningControls from './LearningControls';
 import ProgressMark from './ProgressMark';
 import LearningExpression1 from './LearningExpression1';
 import LearningExpression2 from './LearningExpression2';
+import ExpressionIsLearning from '../Expression/ExpressionIsLearning';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -89,10 +90,6 @@ const LearningUnitView = (props) => {
     return transText;
   }
 
-  const setExpressionLearned = () => {
-    props.onExpressionLearned(props.expressions[currentExpression].id);
-  }
-
   const getExpressionsTotal = () => {
     return props.expressions.length;
   }
@@ -161,7 +158,7 @@ const LearningUnitView = (props) => {
               total={getExpressionsTotal()} />
             <LearningExpression1
               expression={getCurrentExpression()}
-              onLearned={setExpressionLearned} />
+             />
             <LearningExpression2
               expression={getCurrentTranslation()} />
           </CardContent>
@@ -169,7 +166,12 @@ const LearningUnitView = (props) => {
           <CardActions disableSpacing>
             <LearningControls
               onPrevious={handleOnPrevious}
-              onNext={handleOnNext} />
+              onNext={handleOnNext}
+            />
+            <ExpressionIsLearning
+              id={props.expressions[currentExpression] && props.expressions[currentExpression].id}
+              isLearning={props.expressions[currentExpression] && props.expressions[currentExpression].isLearning}
+              onIsLearningToggle={props.onIsLearningToggle} />
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,

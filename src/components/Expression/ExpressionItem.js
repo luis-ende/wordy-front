@@ -12,8 +12,9 @@ import IconButton from '@material-ui/core/IconButton';
 import LabelIcon from '@material-ui/icons/Label';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVert from '@material-ui/icons/MoreVert';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Tooltip from '@material-ui/core/Tooltip';
+
+import ExpressionIsLearning from './ExpressionIsLearning';
 
 const ExpressionItem = (props) => {
   const [secondary, setSecondary] = React.useState(true);
@@ -29,6 +30,10 @@ const ExpressionItem = (props) => {
       });
   }
 
+  const handleIsLearningToggle = () => {    
+    dispatch('TOGGLE_IS_LEARNING', props.id);
+  }
+
   return (
     <ListItem key={props.id}>
       <ListItemAvatar>
@@ -41,11 +46,10 @@ const ExpressionItem = (props) => {
         secondary={secondary ? props.textLanguage2 : null}
       />
       <ListItemSecondaryAction>
-        <Tooltip title="Mark as learned">
-          <IconButton edge="end" aria-label="learned">
-            <CheckCircleIcon color="secondary" />
-          </IconButton>
-        </Tooltip>
+        <ExpressionIsLearning
+          id={props.id}
+          isLearning={props.isLearning}
+          onIsLearningToggle={handleIsLearningToggle} />
         <Tooltip title="Delete">
           <IconButton edge="end" aria-label="delete" onClick={handleClickDeleteButton}>
             <DeleteIcon />

@@ -70,10 +70,10 @@ const ExpressionDialog = (props) => {
           onChange={handleChange}
           fullWidth
         >
-          <MenuItem aria-label="None" value={0}>None</MenuItem>
-          <MenuItem key={1} value={1}>Verb</MenuItem>
-          <MenuItem key={2} value={2}>Noun</MenuItem>
-          <MenuItem key={3} value={3}>Preposition</MenuItem>
+          <MenuItem aria-label="None" value="">None</MenuItem>
+          <MenuItem value={1}>Noun</MenuItem>
+          <MenuItem value={2}>Verb</MenuItem>
+          <MenuItem value={3}>Preposition</MenuItem>
         </Select>
       </DialogContent>
       <DialogActions>

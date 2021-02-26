@@ -5,7 +5,6 @@ import IconButton from '@material-ui/core/IconButton';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles((theme) => ({
   playIcon: {
@@ -13,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     width: 38,
   },
 }));
-
 
 const LerningControls = (props) => {
   const classes = useStyles();
@@ -28,9 +26,6 @@ const LerningControls = (props) => {
       </IconButton>
       <IconButton onClick={props.onNext} aria-label="next">
         <SkipNextIcon />
-      </IconButton>
-      <IconButton onClick={props.onNext} aria-label="learned">
-        <CheckCircleIcon color="secondary" />
       </IconButton>
     </div>
   );

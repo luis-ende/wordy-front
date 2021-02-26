@@ -58,6 +58,7 @@ const ExpressionList = () => {
       textLanguage1={exp.textLanguage1}
       textLanguage2={exp.textLanguage2}
       onShowOptions={handleMoreButtonClick}
+      isLearning={exp.isLearning}
        />
   ));
 
