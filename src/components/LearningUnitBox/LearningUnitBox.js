@@ -74,8 +74,7 @@ class LearningUnitBox extends React.Component {
           onLearningUnitChange={this.handleLearningUnitChange} />
         <LearningUnitView
           unit={this.state.currentLearningUnit}
-          expressions={this.state.expressions}
-          currentExpression={0}
+          expressions={this.state.expressions}          
           onIsLearningToggle={this.handleIsLearningToggle}
         />
       </div>

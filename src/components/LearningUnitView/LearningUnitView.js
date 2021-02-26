@@ -55,11 +55,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LearningUnitView = (props) => {
   const classes = useStyles();
-  const [expressions] = useState(props.expressions);
-  const [currentExpression, setCurrentExpression] = useState(
-    props.currentExpression,
-  );
-
+  const [expressions, setExpressions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [currentExpression, setCurrentExpression] = useState(null);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -67,59 +65,50 @@ const LearningUnitView = (props) => {
   };
 
   useEffect(() => {
-    setCurrentExpression(0);
+    setExpressions(props.expressions);
+    setCurrentIndex(-1);
+  }, [props.expressions]);
+
+  useEffect(() => {
+    setCurrentIndex(expressions.length > 0 ? 0 : -1);
   }, [expressions]);
 
-  const getCurrentExpression = () => {
-    let expText = '---';
-
-    if (props.expressions[currentExpression]) {
-      expText = props.expressions[currentExpression].textLanguage1;
+  useEffect(() => {
+    if (expressions[currentIndex]) {
+      setCurrentExpression(expressions[currentIndex]);
+    } else {
+      setCurrentExpression(null);
     }
-
-    return expText;
-  }
-
-  const getCurrentTranslation = () => {
-    let transText = '---';
-
-    if (props.expressions[currentExpression]) {
-      transText = props.expressions[currentExpression].textLanguage2;
-    }
-
-    return transText;
-  }
+  }, [currentIndex]);
 
   const getExpressionsTotal = () => {
-    return props.expressions.length;
+    return expressions.length;
   }
 
   const getLearningProgress = () => {
-    if (currentExpression >= 0 &&
-        props.expressions.length > 0) {
-      return currentExpression + 1;
+    if (currentIndex >= 0 &&
+        expressions.length > 0) {
+      return currentIndex + 1;
     } else {
       return 0;
     }
   }
 
   const handleOnPrevious = () => {
-    let expIndex = currentExpression;
-    expIndex--;
-    if (props.expressions[expIndex]) {
-      setCurrentExpression(expIndex);
+    let expIndex = currentIndex;
+    if (expressions[--expIndex]) {
+      setCurrentIndex(expIndex);
     }
   }
 
   const handleOnNext = () => {
-    let expIndex = currentExpression;
-    expIndex++;
-    if (props.expressions[expIndex]) {
-      setCurrentExpression(expIndex);
+    let expIndex = currentIndex;
+    if (expressions[++expIndex]) {
+      setCurrentIndex(expIndex);
     }
   }
 
-  const exprs = props.expressions.map(exp => {
+  const expressionList = expressions.map(exp => {
     return (
       <ListItem
         key={exp.id}
@@ -133,6 +122,42 @@ const LearningUnitView = (props) => {
     );
   });
 
+  const expressionCard = (
+    <CardContent className={classes.content}>
+      <ProgressMark
+        progress={getLearningProgress()}
+        total={getExpressionsTotal()} />
+      <LearningExpression1
+        expression={currentExpression && currentExpression.textLanguage1}
+       />
+      <LearningExpression2
+        expression={currentExpression && currentExpression.textLanguage2} />
+    </CardContent>
+  );
+
+  const expressionActions = (
+    <CardActions disableSpacing>
+      <LearningControls
+        onPrevious={handleOnPrevious}
+        onNext={handleOnNext}
+      />
+      <ExpressionIsLearning
+        id={currentExpression && currentExpression.id}
+        isLearning={currentExpression && currentExpression.isLearning}
+        onIsLearningToggle={props.handleIsLearningToggle} />
+      <IconButton
+        className={clsx(classes.expand, {
+          [classes.expandOpen]: expanded,
+        })}
+        onClick={handleExpandClick}
+        aria-expanded={expanded}
+        aria-label="show more"
+      >
+        <ExpandMoreIcon />
+      </IconButton>
+    </CardActions>
+  );
+
   return (
     <div>
       <Card className={classes.root}>
@@ -144,51 +169,24 @@ const LearningUnitView = (props) => {
             </Avatar>
           }
           action={
+            currentExpression &&
             <IconButton aria-label="edit">
               <MoreVertIcon />
             </IconButton>
           }
-          title="Expression to learn"
-          subheader="Verb"
+          title={currentExpression ? "Expression to learn." : "No expressions to learn."}
+          subheader={currentExpression ? "Verb" : "Select a learning unit."}
           />
           <Divider />
-          <CardContent className={classes.content}>
-            <ProgressMark
-              progress={getLearningProgress()}
-              total={getExpressionsTotal()} />
-            <LearningExpression1
-              expression={getCurrentExpression()}
-             />
-            <LearningExpression2
-              expression={getCurrentTranslation()} />
-          </CardContent>
+          {currentExpression && expressionCard}
           <Divider />
-          <CardActions disableSpacing>
-            <LearningControls
-              onPrevious={handleOnPrevious}
-              onNext={handleOnNext}
-            />
-            <ExpressionIsLearning
-              id={props.expressions[currentExpression] && props.expressions[currentExpression].id}
-              isLearning={props.expressions[currentExpression] && props.expressions[currentExpression].isLearning}
-              onIsLearningToggle={props.onIsLearningToggle} />
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
+          {currentExpression && expressionActions}
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>Expressions in unit "{props.unit}"</Typography>
               <Divider />
               <List component="nav" aria-label="main expressions">
-                {exprs}
+                {expressionList}
               </List>
             </CardContent>
         </Collapse>
