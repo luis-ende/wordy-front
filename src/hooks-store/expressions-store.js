@@ -6,9 +6,14 @@ const configureStore = async () => {
       return { expressions: [...expressions] }
     },
     ADD_EXPRESSION: (curState, expression) => {
-      console.log('add expression');
       const updatedExpressions = [expression, ...curState.expressions];
-      console.log(updatedExpressions);
+      return { expressions: updatedExpressions }
+    },
+    DELETE_EXPRESSION: (curState, expressionId) => {
+      const updatedExpressions = [...curState.expressions];
+      const index = updatedExpressions.findIndex(e => e.id === expressionId);
+      updatedExpressions.splice(index, index >= 0 ? 1 : 0);
+
       return { expressions: updatedExpressions }
     }
   };

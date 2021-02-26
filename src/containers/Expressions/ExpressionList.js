@@ -2,18 +2,13 @@ import React, { useEffect } from 'react';
 
 import { useStore } from '../../hooks-store/store';
 import axios from '../../axios-wordyapp';
+import ExpressionItem from '../../components/Expression/ExpressionItem';
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import LabelIcon from '@material-ui/icons/Label';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,8 +27,18 @@ const ExpressionList = () => {
   const classes = useStyles();
   const [state, dispatch] = useStore();
   const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(true);
   const [error, setError] = React.useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMoreButtonClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMoreMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     axios.get( 'expressions.json' )
@@ -47,22 +52,13 @@ const ExpressionList = () => {
   }, []);
 
   let items = state.expressions && state.expressions.map( exp => (
-    <ListItem key={exp.id}>
-      <ListItemAvatar>
-        <Avatar>
-          <LabelIcon />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText
-        primary={exp.textLanguage1}
-        secondary={secondary ? exp.textLanguage2 : null}
-      />
-      <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
+    <ExpressionItem
+      key={exp.id}
+      id={exp.id}
+      textLanguage1={exp.textLanguage1}
+      textLanguage2={exp.textLanguage2}
+      onShowOptions={handleMoreButtonClick}
+       />
   ));
 
   return (
@@ -74,6 +70,17 @@ const ExpressionList = () => {
         <List dense={dense}>
           { items }
         </List>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleMoreMenuClose}
+        >
+          <MenuItem onClick={handleMoreMenuClose}>Edit</MenuItem>
+          <MenuItem onClick={handleMoreMenuClose}>Assign to learning unit</MenuItem>
+          <MenuItem onClick={handleMoreMenuClose}>Go to dictionary</MenuItem>
+        </Menu>
       </div>
     </div>
   );

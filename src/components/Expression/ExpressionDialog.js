@@ -39,7 +39,7 @@ const ExpressionDialog = (props) => {
   }
 
   return (
-    <form onSubmit="handleSubmit">
+    <form>
       <Dialog open={props.open} onClose={props.onClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Wordy Expressions</DialogTitle>
         <DialogContent>
