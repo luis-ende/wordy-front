@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,13 +27,12 @@ const LearuningUnitSelect = (props) => {
     <FormControl variant="outlined" className={classes.formControl}>
       <InputLabel htmlFor="outlined-lu-native-simple">Learning Unit</InputLabel>
       <Select
-        native
         onChange={handleUnitSelectChange}
         label="Learning Unit"
       >
-        <option aria-label="None" key="default" value="-1">Select learning unit</option>
+        <MenuItem aria-label="None" key="default" value="-1">Select learning unit</MenuItem>
         {props.units.map( unit => (
-          <option key={unit.id} value={unit.id}>{unit.name}</option>
+          <MenuItem key={unit.id} value={unit.id}>{unit.name}</MenuItem>
         ))}
       </Select>
     </FormControl>
