@@ -11,13 +11,14 @@ const SecondaryNavBar = () => {
           <NavLink
               to='/'
               exact>
-              Learn
+              Vocabulary List
           </NavLink>
         </li>
         <li>
           <NavLink
-              to='/review'>
-              Vocabulary List
+              to='/learn'
+              >
+              Learn
           </NavLink>
         </li>
       </ul>

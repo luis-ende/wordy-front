@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useStore } from '../../hooks-store/store';
 import axios from '../../axios-wordyapp';
 import ExpressionItem from '../../components/Expression/ExpressionItem';
+import LearningUnitSelectDialog from '../../components/LearningUnit/LearningUnitSelectDialog';
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -28,9 +29,8 @@ const ExpressionList = () => {
   const [state, dispatch] = useStore();
   const [dense, setDense] = React.useState(false);
   const [error, setError] = React.useState(false);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
   const handleMoreButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,6 +38,14 @@ const ExpressionList = () => {
 
   const handleMoreMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMenuAssignLUClick = (event) => {
+    setIsDialogOpen(true);
+  }
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
   };
 
   useEffect(() => {
@@ -62,10 +70,17 @@ const ExpressionList = () => {
        />
   ));
 
+  const renderLearningUnitDialog = (
+    <LearningUnitSelectDialog
+      open={isDialogOpen}
+      onClose={handleDialogClose}
+    />
+  );
+
   return (
     <div className={classes.root}>
       <Typography variant="h6" className={classes.title}>
-        Vocabulary List
+        Registered expressions:
       </Typography>
       <div className={classes.demo}>
         <List dense={dense}>
@@ -79,10 +94,11 @@ const ExpressionList = () => {
           onClose={handleMoreMenuClose}
         >
           <MenuItem onClick={handleMoreMenuClose}>Edit</MenuItem>
-          <MenuItem onClick={handleMoreMenuClose}>Assign to learning unit</MenuItem>
+          <MenuItem onClick={handleMenuAssignLUClick}>Assign to learning unit</MenuItem>
           <MenuItem onClick={handleMoreMenuClose}>Go to dictionary</MenuItem>
         </Menu>
       </div>
+      {renderLearningUnitDialog}
     </div>
   );
 }

@@ -37,7 +37,7 @@ const configureStore = () => {
     }
   };
 
-  initStore(actions, []);
+  initStore(actions, { expressions: [] });
 }
 
 export default configureStore;

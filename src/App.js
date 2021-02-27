@@ -10,8 +10,9 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
+          <Route path="/learn" component={LearningUnitBox} />
           <Route path="/review" component={ExpressionList} />
-          <Route path="/" exact component={LearningUnitBox} />
+          <Route path="/" exact component={ExpressionList} />
         </Switch>
       </Layout>
     )
