@@ -12,8 +12,7 @@ class LearningUnitBox extends React.Component {
       currentLearningUnit: '',
       error: false
     }
-    this.handleLearningUnitChange = this.handleLearningUnitChange.bind(this);
-    this.handleIsLearningToggle = this.handleIsLearningToggle.bind(this);
+    this.handleLearningUnitChange = this.handleLearningUnitChange.bind(this);    
   }
 
   componentDidMount () {
@@ -51,10 +50,6 @@ class LearningUnitBox extends React.Component {
     }
   }
 
-  handleIsLearningToggle() {
-    //dispatch('TOGGLE_IS_LEARNING', props.id);
-  }
-
   render() {
     return (
       <div>
@@ -64,7 +59,6 @@ class LearningUnitBox extends React.Component {
         <LearningUnitView
           unit={this.state.currentLearningUnit}
           expressions={this.state.expressions}
-          onIsLearningToggle={this.handleIsLearningToggle}
         />
       </div>
     );

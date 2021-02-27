@@ -75,10 +75,9 @@ const LearningUnitView = (props) => {
   useEffect(() => {
     if (((currentIndex + 1) > expressions.length) &&
       (expressions.length > 0)) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex(currentIndex => currentIndex - 1);
     }
-
-  }, [expressions]);
+  }, [expressions, currentIndex]);
 
   useEffect(() => {
     if (expressions[currentIndex]) {
@@ -129,7 +128,6 @@ const LearningUnitView = (props) => {
       let updatedExpressions = [...expressions];
       updatedExpressions[index] = updatedCurrentExpression;
       setExpressions(updatedExpressions.filter(e => e.isLearning));
-      props.onIsLearningToggle();
     }).catch( error => {
     });
   }

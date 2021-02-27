@@ -1,5 +1,5 @@
 import React from 'react';
-import LearningUnitSelect from './LearningUnitSelect/LearningUnitSelect'
+import LearningUnitSelect from './LearningUnitSelect'
 
 class LearningUnitHeader extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class LearningUnitHeader extends React.Component {
 
   render() {
     return (
-      <div>        
+      <div>
         <LearningUnitSelect
           units={this.props.units}
           onLearningUnitChange={this.handleLearuningUnitChange} />
