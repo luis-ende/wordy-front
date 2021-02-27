@@ -66,6 +66,7 @@ const ExpressionDialog = (props) => {
         />
         <InputLabel htmlFor="grammatical-type">Grammatical Type</InputLabel>
         <Select
+          id="grammarType"
           labelId="grammatical-type"
           onChange={handleChange}
           fullWidth

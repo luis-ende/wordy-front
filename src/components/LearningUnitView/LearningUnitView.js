@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
+import axios from '../../axios-wordyapp';
+
 import LearningControls from './LearningControls';
 import ProgressMark from './ProgressMark';
 import LearningExpression1 from './LearningExpression1';
@@ -65,12 +68,16 @@ const LearningUnitView = (props) => {
   };
 
   useEffect(() => {
-    setExpressions(props.expressions);
-    setCurrentIndex(-1);
+    setExpressions(props.expressions.filter(e => e.isLearning));
+    setCurrentIndex(props.expressions.length > 0 ? 0 : -1);
   }, [props.expressions]);
 
   useEffect(() => {
-    setCurrentIndex(expressions.length > 0 ? 0 : -1);
+    if (((currentIndex + 1) > expressions.length) &&
+      (expressions.length > 0)) {
+      setCurrentIndex(currentIndex - 1);
+    }
+
   }, [expressions]);
 
   useEffect(() => {
@@ -79,7 +86,7 @@ const LearningUnitView = (props) => {
     } else {
       setCurrentExpression(null);
     }
-  }, [currentIndex]);
+  }, [expressions, currentIndex]);
 
   const getExpressionsTotal = () => {
     return expressions.length;
@@ -106,6 +113,25 @@ const LearningUnitView = (props) => {
     if (expressions[++expIndex]) {
       setCurrentIndex(expIndex);
     }
+  }
+
+  const handleIsLearningToggle = () => {
+    const isLearningToggled = !currentExpression.isLearning;
+    const updatedCurrentExpression = {
+      ...currentExpression,
+      isLearning: isLearningToggled
+    }
+
+    axios.patch( `expressions/${currentExpression.id}`, updatedCurrentExpression,
+      { headers: { 'Content-Type': 'application/merge-patch+json' } } )
+    .then( response=> {
+      let index = expressions.findIndex(e => e.id === currentExpression.id);
+      let updatedExpressions = [...expressions];
+      updatedExpressions[index] = updatedCurrentExpression;
+      setExpressions(updatedExpressions.filter(e => e.isLearning));
+      props.onIsLearningToggle();
+    }).catch( error => {
+    });
   }
 
   const expressionList = expressions.map(exp => {
@@ -144,7 +170,7 @@ const LearningUnitView = (props) => {
       <ExpressionIsLearning
         id={currentExpression && currentExpression.id}
         isLearning={currentExpression && currentExpression.isLearning}
-        onIsLearningToggle={props.handleIsLearningToggle} />
+        onIsLearningToggle={handleIsLearningToggle} />
       <IconButton
         className={clsx(classes.expand, {
           [classes.expandOpen]: expanded,

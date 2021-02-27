@@ -30,8 +30,15 @@ const ExpressionItem = (props) => {
       });
   }
 
-  const handleIsLearningToggle = () => {    
-    dispatch('TOGGLE_IS_LEARNING', props.id);
+  const handleIsLearningToggle = () => {
+    const updatedExpression = { 'isLearning': !props.isLearning };
+    axios.patch( `expressions/${props.id}`, updatedExpression, {
+       headers: { 'Content-Type': 'application/merge-patch+json' }
+    } )
+    .then( response=> {
+      dispatch('TOGGLE_IS_LEARNING', props.id);
+    }).catch( error => {
+    });
   }
 
   return (

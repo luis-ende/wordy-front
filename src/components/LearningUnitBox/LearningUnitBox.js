@@ -51,19 +51,8 @@ class LearningUnitBox extends React.Component {
     }
   }
 
-  handleIsLearningToggle(expressionId) {
-    let index = this.state.expressions.findIndex(e => e.id === expressionId);
-    if (index >= 0) {
-      let updatedExpressions = [...this.state.expressions];
-      updatedExpressions[index] = {
-        ...this.state.expressions[index],
-        isLearning: !this.state.expressions[index].isLearning
-      }
-      this.setState({
-        expressions: updatedExpressions
-      });
-      //dispatch('TOGGLE_IS_LEARNING', props.id);
-    }
+  handleIsLearningToggle() {
+    //dispatch('TOGGLE_IS_LEARNING', props.id);
   }
 
   render() {
@@ -74,7 +63,7 @@ class LearningUnitBox extends React.Component {
           onLearningUnitChange={this.handleLearningUnitChange} />
         <LearningUnitView
           unit={this.state.currentLearningUnit}
-          expressions={this.state.expressions}          
+          expressions={this.state.expressions}
           onIsLearningToggle={this.handleIsLearningToggle}
         />
       </div>
