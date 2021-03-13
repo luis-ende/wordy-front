@@ -20,7 +20,7 @@ const LearningUnitBox = (props) => {
       setExpressions([]);
     }
     else {
-      axios.get( `expressions?learningUnits.id=${learningUnit}` )
+      axios.get( `learning_units/${learningUnit}/expressions` )
         .then( response => {
           // eslint-disable-next-line
           let unit = state.units.find( unit => unit.id == learningUnit );

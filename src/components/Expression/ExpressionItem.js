@@ -63,7 +63,7 @@ const ExpressionItem = (props) => {
           </IconButton>
         </Tooltip>
         <Tooltip title="More options">
-          <IconButton edge="end" aria-label="more" onClick={props.onShowOptions}>
+          <IconButton edge="end" aria-label="more" onClick={ event => props.onShowOptions(event, props.id) }>
             <MoreVert />
           </IconButton>
         </Tooltip>

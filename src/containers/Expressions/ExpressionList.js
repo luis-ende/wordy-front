@@ -31,9 +31,11 @@ const ExpressionList = () => {
   const [error, setError] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [selectedExpression, setSelectedExpression] = React.useState(null);
 
-  const handleMoreButtonClick = (event) => {
+  const handleMoreButtonClick = (event, expId) => {
     setAnchorEl(event.currentTarget);
+    setSelectedExpression(expId);
   };
 
   const handleMoreMenuClose = () => {
@@ -41,6 +43,7 @@ const ExpressionList = () => {
   };
 
   const handleMenuAssignLUClick = (event) => {
+    setAnchorEl(null);
     setIsDialogOpen(true);
   }
 
@@ -72,6 +75,7 @@ const ExpressionList = () => {
 
   const renderLearningUnitDialog = (
     <LearningUnitSelectDialog
+      expression={selectedExpression}
       open={isDialogOpen}
       onClose={handleDialogClose}
     />

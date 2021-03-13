@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { useStore } from '../../hooks-store/store';
+import axios from '../../axios-wordyapp';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -13,8 +14,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import axios from '../../axios-wordyapp';
 
 const ExpressionDialog = (props) => {
   const dispatch = useStore()[1];
