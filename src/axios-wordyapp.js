@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://wordy-back.herokuapp.com/api/'
+    baseURL: 'http://wordy.test/api/'
 });
 
 export default instance;
