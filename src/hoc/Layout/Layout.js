@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Aux from '../Aux/Aux';
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@mui/styles/makeStyles';
 import NavBar from '../../components/Navigation/NavBar';
 import SecondaryNavBar from '../../components/Navigation/SecondaryNavBar';
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   contentRoot: {
   },
   contentTitle: {
@@ -15,20 +15,20 @@ const useStyles = makeStyles((theme) => ({
   container: {
     maxWidth: '420px',
   }
-}));
+})); */
 
 const Layout = (props) => {
-  const classes = useStyles();
+  //const classes = useStyles();
 
   return (
     <Aux>
       <header>
         <NavBar />
       </header>
-      <main className={classes.contentRoot}>
+      <main>
         <SecondaryNavBar />
         <Aux>
-          <Container className={classes.container}>
+          <Container>
             {props.children}
           </Container>
         </Aux>

@@ -3,20 +3,20 @@ import React, { useEffect } from 'react';
 import { useStore } from '../../hooks-store/store';
 import axios from '../../axios-wordyapp';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import Chip from '@material-ui/core/Chip';
+//import { makeStyles, useTheme } from '@mui/styles/makeStyles';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Chip from '@mui/material/Chip';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   chip: {
     margin: 2,
   },
-}));
+})); */
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -42,18 +42,18 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, unitNames, theme) {
+/* function getStyles(name, unitNames, theme) {
   return {
     fontWeight:
       unitNames.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
-}
+} */
 
 const LearningUnitSelectDialog = (props) => {
-  const classes = useStyles();
-  const theme = useTheme();
+  //const classes = useStyles();
+  //const theme = useTheme();
   const state = useStore()[0];
   const [unitNames, setUnitNames] = React.useState([]);
 
@@ -77,7 +77,7 @@ const LearningUnitSelectDialog = (props) => {
       let unit = state.units.find( unit => unit.name === name );
       return unit.id;
     });
-    axios.patch( `expressions/${props.expression}/units`, `{\"learningUnits\":[${luIds}]}` )
+    axios.patch( `expressions/${props.expression}/units`, `{"learningUnits":[${luIds}]}` )
       .then( response => {
         //dispatch('ADD_EXPRESSION', response.data);
         props.onClose();
@@ -93,7 +93,9 @@ const LearningUnitSelectDialog = (props) => {
         <DialogContentText>
           Add expression to learning units:
         </DialogContentText>
-        <FormControl  className={classes.formControl}>
+        <FormControl 
+          //className={classes.formControl}
+        >
           <Select
             id="demo-mutiple-chip"
             fullWidth
@@ -102,22 +104,29 @@ const LearningUnitSelectDialog = (props) => {
             onChange={handleSelectChange}
             input={<Input id="select-multiple-chip" />}
             renderValue={(selected) => (
-              <div className={classes.chips}>
+              <div 
+                //className={classes.chips}
+              >
                 {selected.map((value) => (
-                  <Chip key={value} label={value} className={classes.chip} />
+                  <Chip 
+                    key={value} 
+                    label={value} 
+                    //className={classes.chip} 
+                  />
                 ))}
               </div>
             )}
             MenuProps={MenuProps}
           >
-            {state.units.map((unit) => (
+            {state.units ? state.units.map((unit) => (
               <MenuItem
                 key={unit.id}
                 value={unit.name}
-                style={getStyles(unit.name, unitNames, theme)}>
+                //style={getStyles(unit.name, unitNames, theme)}
+              >
                 {unit.name}
               </MenuItem>
-            ))}
+            )) : <p>Cargando...</p> }
           </Select>
         </FormControl>
       </DialogContent>

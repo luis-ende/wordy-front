@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import IconButton from '@material-ui/core/IconButton';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ScheduleIcon from '@material-ui/icons/Schedule';
-import Tooltip from '@material-ui/core/Tooltip';
-import { green } from '@material-ui/core/colors';
+import IconButton from '@mui/material/IconButton';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import Tooltip from '@mui/material/Tooltip';
+import { green } from '@mui/material/colors';
 
 const ExpressionIsLearning = (props) => {
   const [isLearning, setIsLearning] = useState(false);

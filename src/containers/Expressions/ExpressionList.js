@@ -5,13 +5,13 @@ import axios from '../../axios-wordyapp';
 import ExpressionItem from '../../components/Expression/ExpressionItem';
 import LearningUnitSelectDialog from '../../components/LearningUnit/LearningUnitSelectDialog';
 
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+//import { makeStyles } from '@mui/styles/makeStyles';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxWidth: 752,
@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
   title: {
     margin: theme.spacing(4, 0, 2),
   },
-}));
+})); */
 
 const ExpressionList = () => {
-  const classes = useStyles();
+  //const classes = useStyles();
   const [state, dispatch] = useStore();
-  const [dense, setDense] = React.useState(false);
-  const [error, setError] = React.useState(false);
+  const [dense] = React.useState(false);
+  const [setError] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [selectedExpression, setSelectedExpression] = React.useState(null);
@@ -51,27 +51,18 @@ const ExpressionList = () => {
     setIsDialogOpen(false);
   };
 
-  useEffect(() => {
-    axios.get( 'expressions.json' )
+  useEffect(() => {    
+    if (state.expressions.length === 0) {      
+      axios.get( 'expressions.json' )
       .then( response => {
         const expressionsData = response.data;
         dispatch('SET_EXPRESSIONS', expressionsData);
       })
       .catch( error => {
         setError(true);
-      });
-  }, []);
-
-  let items = state.expressions && state.expressions.map( exp => (
-    <ExpressionItem
-      key={exp.id}
-      id={exp.id}
-      textLanguage1={exp.textLanguage1}
-      textLanguage2={exp.textLanguage2}
-      onShowOptions={handleMoreButtonClick}
-      isLearning={exp.isLearning}
-       />
-  ));
+      }); 
+    }
+  });  
 
   const renderLearningUnitDialog = (
     <LearningUnitSelectDialog
@@ -82,13 +73,23 @@ const ExpressionList = () => {
   );
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h6" className={classes.title}>
+    <div>      
+      <Typography variant="h6">
         Registered expressions:
       </Typography>
-      <div className={classes.demo}>
+      <div>
         <List dense={dense}>
-          { items }
+          { 
+            state.expressions && state.expressions.map( exp => (
+              <ExpressionItem
+                key={exp.id}
+                id={exp.id}
+                textLanguage1={exp.textLanguage1}
+                textLanguage2={exp.textLanguage2}
+                onShowOptions={handleMoreButtonClick}
+                isLearning={exp.isLearning}
+                />
+          ))}
         </List>
         <Menu
           id="simple-menu"

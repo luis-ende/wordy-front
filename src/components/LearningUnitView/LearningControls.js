@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+//import { makeStyles } from '@mui/styles/makeStyles';
+import IconButton from '@mui/material/IconButton';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   playIcon: {
     height: 38,
     width: 38,
   },
-}));
+})); */
 
 const LerningControls = (props) => {
-  const classes = useStyles();
+  //const classes = useStyles();
 
   return (
     <div>
@@ -22,7 +22,7 @@ const LerningControls = (props) => {
         <SkipPreviousIcon />
       </IconButton>
       <IconButton aria-label="play/pause">
-        <PlayArrowIcon className={classes.playIcon} />
+        <PlayArrowIcon />
       </IconButton>
       <IconButton onClick={props.onNext} aria-label="next">
         <SkipNextIcon />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useStore } from '../../hooks-store/store';
 import axios from '../../axios-wordyapp';
@@ -10,8 +10,8 @@ const LearningUnitBox = (props) => {
   //const [units, setUnits] = useState([]);
   const [expressions, setExpressions] = useState([]);
   const [currentLearningUnit, setCurrentLearnigUnit] = useState('');
-  const [error, setError] = useState(false);
-  const [state, dispatch] = useStore();
+  const [setError] = useState(false);
+  const [state] = useStore();
 
   const handleLearningUnitChange = (learningUnit) => {
     // eslint-disable-next-line

@@ -8,27 +8,27 @@ import LearningExpression1 from './LearningExpression1';
 import LearningExpression2 from './LearningExpression2';
 import ExpressionIsLearning from '../Expression/ExpressionIsLearning';
 
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@mui/styles/makeStyles';
 import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import EditIcon from '@material-ui/icons/Edit';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Divider from '@material-ui/core/Divider';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import EditIcon from '@mui/icons-material/Edit';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Divider from '@mui/material/Divider';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   root: {
     width: '420px',
     display: 'flex',
@@ -54,10 +54,10 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
-}));
+})); */
 
 const LearningUnitView = (props) => {
-  const classes = useStyles();
+  //const classes = useStyles();
   const [expressions, setExpressions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [currentExpression, setCurrentExpression] = useState(null);
@@ -147,7 +147,7 @@ const LearningUnitView = (props) => {
   });
 
   const expressionCard = (
-    <CardContent className={classes.content}>
+    <CardContent >
       <ProgressMark
         progress={getLearningProgress()}
         total={getExpressionsTotal()} />
@@ -170,9 +170,9 @@ const LearningUnitView = (props) => {
         isLearning={currentExpression && currentExpression.isLearning}
         onIsLearningToggle={handleIsLearningToggle} />
       <IconButton
-        className={clsx(classes.expand, {
+        /* className={clsx(classes.expand, {
           [classes.expandOpen]: expanded,
-        })}
+        })} */
         onClick={handleExpandClick}
         aria-expanded={expanded}
         aria-label="show more"
@@ -184,11 +184,11 @@ const LearningUnitView = (props) => {
 
   return (
     <div>
-      <Card className={classes.root}>
-        <div className={classes.details}>
+      <Card >
+        <div >
           <CardHeader
           avatar={
-            <Avatar aria-label="expression" className={classes.avatar}>
+            <Avatar aria-label="expression" >
               W
             </Avatar>
           }

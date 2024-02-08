@@ -9,6 +9,7 @@ const SecondaryNavBar = () => {
       <ul className='SecondaryNavBarItems'>
         <li>
           <NavLink
+              end
               to='/'
               exact>
               Vocabulary List
@@ -16,6 +17,7 @@ const SecondaryNavBar = () => {
         </li>
         <li>
           <NavLink
+              end
               to='/learn'
               >
               Learn

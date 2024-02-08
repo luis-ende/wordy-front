@@ -1,23 +1,23 @@
 import React from 'react';
 
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
-import MoreIcon from '@material-ui/icons/MoreVert';
+//import { makeStyles } from '@mui/styles/makeStyles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import MoreIcon from '@mui/icons-material/MoreVert';
 
 import ExpressionDialog from '../Expression/ExpressionDialog';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: theme.palette.common.white,
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: theme.palette.common.white,
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -79,10 +79,10 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-}));
+})); */
 
 const NavBar = () => {
-  const classes = useStyles();
+  //const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -175,35 +175,49 @@ const NavBar = () => {
   );
 
   return (
-    <div className={classes.grow}>
+    <div 
+      //className={classes.grow}
+    >
       <AppBar position="static">
         <Toolbar>
           <IconButton
             edge="start"
-            className={classes.menuButton}
+            //className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography 
+            //className={classes.title} 
+            variant="h6" 
+            noWrap
+          >
             Wordy App
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <div 
+            //className={classes.search}
+          >
+            <div 
+              //className={classes.searchIcon}
+            >
               <SearchIcon />
             </div>
             <InputBase
               placeholder="Search…"
-              classes={{
+              /* classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
-              }}
+              }} */
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          <div 
+            //className={classes.grow} 
+          />
+          <div 
+            //className={classes.sectionDesktop}
+          >
             <IconButton
               aria-label="add expression"
               color="inherit"
@@ -224,7 +238,9 @@ const NavBar = () => {
               <AccountCircle />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
+          <div 
+            //className={classes.sectionMobile}
+          >
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
