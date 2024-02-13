@@ -6,6 +6,8 @@ import axios from '../../axios-wordyapp';
 import LearningUnitHeader from './LearningUnitHeader';
 import LearningUnitView from '../LearningUnitView/LearningUnitView';
 
+import Box from '@mui/material/Box';
+
 const LearningUnitBox = (props) => {
   //const [units, setUnits] = useState([]);
   const [expressions, setExpressions] = useState([]);
@@ -14,6 +16,8 @@ const LearningUnitBox = (props) => {
   const [state] = useStore();
 
   const handleLearningUnitChange = (learningUnit) => {
+    console.log('handling event')
+    console.log(learningUnit)
     // eslint-disable-next-line
     if (learningUnit == -1) {
       setCurrentLearnigUnit('');
@@ -40,13 +44,13 @@ const LearningUnitBox = (props) => {
       onLearningUnitChange={handleLearningUnitChange} />;
 
   return (
-    <div>
+    <Box maxWidth="sm" style={{marginLeft: "auto", marginRight: "auto", marginTop: "30px"}}>      
       {header}
       <LearningUnitView
         unit={currentLearningUnit}
         expressions={expressions}
       />
-    </div>
+    </Box>
   );
 }
 

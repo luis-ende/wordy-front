@@ -6,6 +6,7 @@ import ExpressionItem from '../../components/Expression/ExpressionItem';
 import LearningUnitSelectDialog from '../../components/LearningUnit/LearningUnitSelectDialog';
 
 //import { makeStyles } from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
@@ -73,7 +74,7 @@ const ExpressionList = () => {
   );
 
   return (
-    <div>      
+    <Box maxWidth="sm" style={{marginLeft: "auto", marginRight: "auto", marginTop: "30px"}}>      
       <Typography variant="h6">
         Registered expressions:
       </Typography>
@@ -104,7 +105,7 @@ const ExpressionList = () => {
         </Menu>
       </div>
       {renderLearningUnitDialog}
-    </div>
+    </Box>
   );
 }
 

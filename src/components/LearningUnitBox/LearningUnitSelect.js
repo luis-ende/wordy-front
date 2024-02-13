@@ -24,9 +24,10 @@ const LearuningUnitSelect = (props) => {
   };
 
   return (
-    <FormControl variant="outlined">
+    <FormControl fullWidth variant="outlined">
       <InputLabel htmlFor="outlined-lu-native-simple">Learning Unit</InputLabel>
       <Select
+        style={{marginBottom: "10px"}}
         onChange={handleUnitSelectChange}
         label="Learning Unit"
       >
